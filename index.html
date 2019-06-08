@@ -15,20 +15,26 @@
         body {
             background-image: url("assets/images/cosmos.jpg");
             background-size: cover;
+            text-align: center;
         }
     </style>
 </head>
 
 <body>
+    <div class="title"><img width="500px" height="350px" src="./assets/images/title.png"></div>
 
-    <div class="container bg-white mt-5 py-5">
-        <button type="button" class="btn btn-dark">Start</button>
+    <div class="container bg-white mt-5 py-8">
+
+        <div>&bigstar; Press any key to get started! &bigstar;</div>
 
         <div id="current-word">Current Word:</div>
 
-        Number of guesses left:<div id="guess-number"></div>
+        <p>Number of guesses left:<div id="guess-number"></div>
+        </p>
 
-        <div id="letters-guessed">Letters Already Guessed</div>
+        Letters Already Guessed:
+
+        <div id="letters-guessed"></div>
     </div>
 
 

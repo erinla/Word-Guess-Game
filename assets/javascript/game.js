@@ -1,5 +1,5 @@
 // Array of words to be chosen.
-var words = ["astronaut", "astronomy", "cosmos", "earth", "flare", "interstellar", "jupiter", "lunar", "mercury", "mars", "meteor", "nasa", "observatory", "planet", "pluto", "eclipse", "rocket", "star", "space", "telescope", "terrestrial", "universe", "uranus", "venus",];
+var words = ["earth", "flare", "jupiter", "lunar", "mars", "planet", "pluto", "rocket", "star", "space", "venus",];
 
 //Global Varibles
 var currentWord = null;
@@ -11,6 +11,9 @@ var wins = 0;
 var numberOfGuesses = 10;
 var letterClicked = null;
 
+// Displays number of guesses left.
+document.getElementById("guess-number").innerHTML = numberOfGuesses
+
 // Picks a random word from words array.
 currentWord = words[Math.floor(Math.random() * words.length)];
 console.log(currentWord);
@@ -20,47 +23,50 @@ individualLetters = currentWord.split("");
 console.log(currentWord.split(""));
 
 // Creates a funtion that prints the underscores representing how many letters are in the word.
-function printUnderscores() {
-    for (var i = 0; i < individualLetters.length; i++) {
-
-
-        if (matchedLetters.includes(individualLetters[i])) {
-            underscore += individualLetters[i]
-        } else {
-            underscore += " _ "
-        }
+function createUnderscores() {
+    for (var k = 0; k < currentWord.length; k++) {
+        matchedLetters.push(" _ ");
 
     }
-    document.getElementById("current-word").innerHTML = underscore;
+    document.getElementById("current-word").innerHTML = matchedLetters.join("");
+    console.log(matchedLetters.join())
 }
+createUnderscores();
+
+// Remove underscore and replace with letter clicked.
+function replaceUnderscore(letterMatched) {
+    var storedIndex = currentWord.indexOf(letterMatched)
+    matchedLetters[storedIndex] = letterMatched;
+
+    document.getElementById("current-word").innerHTML = matchedLetters.join('');
+}
+
+
+
 
 // Takes user input and compates it to the current word.
 document.onkeyup = function (event) {
-
     if (event.keyCode >= 65 && event.keyCode <= 90) {
         var letterClicked = event.key.toLowerCase();
         console.log('letter clicked ' + letterClicked)
+        if (currentWord.includes(letterClicked) && !matchedLetters.includes(letterClicked)) {
+            replaceUnderscore(letterClicked);
+            console.log('matched letter ' + matchedLetters)
+        }
 
         if (!guessedLetters.includes(letterClicked) && !currentWord.includes(letterClicked)) {
             guessedLetters.push(letterClicked);
+            console.log(guessedLetters + "guessedLetters");
+            document.getElementById("guess-number").innerHTML = numberOfGuesses--
+            document.getElementById("letters-guessed").innerHTML = guessedLetters.join("");
         }
-
-        for (var j = 0; j < currentWord.length; j++) {
-            if (currentWord.includes(letterClicked) && !matchedLetters.includes(letterClicked)) {
-                matchedLetters.push(letterClicked)
-                console.log('matched letter ' + matchedLetters)
-            }
-        }
+    };
 
 
 
-    } else {
-        alert('click a letter from the alphabet')
-    } printUnderscores();
 
-
-    console.log("incorrect guessed letters " + guessedLetters)
 }
+
 
 
 
