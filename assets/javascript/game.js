@@ -60,6 +60,14 @@ document.onkeyup = function (event) {
             document.getElementById("guess-number").innerHTML = numberOfGuesses--
             document.getElementById("letters-guessed").innerHTML = guessedLetters.join("");
         }
+
+        if (numberOfGuesses === -1) {
+            alert("You lose! Refresh the browser to play again.");
+        }
+
+        if (matchedLetters === currentWord) {
+            alert("You win! Refresh the browswer to play again.");
+        }
     };
 
 
