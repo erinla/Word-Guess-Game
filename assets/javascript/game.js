@@ -41,10 +41,7 @@ function replaceUnderscore(letterMatched) {
     document.getElementById("current-word").innerHTML = matchedLetters.join('');
 }
 
-
-
-
-// Takes user input and compates it to the current word.
+// Takes user input and compares it to the current word.
 document.onkeyup = function (event) {
     if (event.keyCode >= 65 && event.keyCode <= 90) {
         var letterClicked = event.key.toLowerCase();
@@ -56,18 +53,22 @@ document.onkeyup = function (event) {
 
         if (!guessedLetters.includes(letterClicked) && !currentWord.includes(letterClicked)) {
             guessedLetters.push(letterClicked);
-            console.log(guessedLetters + "guessedLetters");
             document.getElementById("guess-number").innerHTML = numberOfGuesses--
             document.getElementById("letters-guessed").innerHTML = guessedLetters.join("");
         }
 
         if (numberOfGuesses === -1) {
-            alert("You lose! Refresh the browser to play again.");
+            alert("You lose! Try again!");
+            document.location.reload()
         }
 
-        if (matchedLetters === currentWord) {
-            alert("You win! Refresh the browswer to play again.");
+        if (currentWord == matchedLetters.join('')) {
+            alert("You win! Congratulations!");
+            console.log(currentWord.split(""))
+            document.location.reload()
         }
+
+
     };
 
 
