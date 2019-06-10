@@ -58,8 +58,7 @@ document.onkeyup = function (event) {
         }
 
         if (numberOfGuesses === -1) {
-            alert("You lose! Try again!");
-            document.location.reload()
+            alert("You lose! Refresh the browser to play again.");
         }
 
         if (currentWord == matchedLetters.join('')) {
