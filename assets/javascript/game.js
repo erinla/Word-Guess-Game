@@ -12,15 +12,32 @@ var numberOfGuesses = 10;
 var letterClicked = null;
 
 // Displays number of guesses left.
-document.getElementById("guess-number").innerHTML = numberOfGuesses
 
 // Picks a random word from words array.
-currentWord = words[Math.floor(Math.random() * words.length)];
-console.log(currentWord);
+// // currentWord = words[Math.floor(Math.random() * words.length)];
+// 
+
+// Counts wins/resets game.
+function gameStart() {
+    numberOfGuesses = 10;
+    document.getElementById("guess-number").innerHTML = numberOfGuesses
+    currentWord = words[Math.floor(Math.random() * words.length)];
+    individualLetters = currentWord.split("");
+    console.log(currentWord.split(""));
+    underscore = '';
+    console.log(currentWord);
+    matchedLetters = [];
+    guessedLetters = [];
+    document.getElementById("letters-guessed").innerHTML = guessedLetters.join(" ");
+    createUnderscores();
+
+}
+gameStart();
+
+
 
 // Splits the chosen word into individual letters.
-individualLetters = currentWord.split("");
-console.log(currentWord.split(""));
+
 
 // Creates a funtion that prints the underscores representing how many letters are in the word.
 function createUnderscores() {
@@ -31,7 +48,7 @@ function createUnderscores() {
     document.getElementById("current-word").innerHTML = matchedLetters.join("");
     console.log(matchedLetters.join())
 }
-createUnderscores();
+// createUnderscores();
 
 // Remove underscore and replace with letter clicked.
 function replaceUnderscore(letterMatched) {
@@ -54,17 +71,21 @@ document.onkeyup = function (event) {
         if (!guessedLetters.includes(letterClicked) && !currentWord.includes(letterClicked)) {
             guessedLetters.push(letterClicked);
             document.getElementById("guess-number").innerHTML = numberOfGuesses--
-            document.getElementById("letters-guessed").innerHTML = guessedLetters.join("");
+            document.getElementById("letters-guessed").innerHTML = guessedLetters.join(" ");
         }
 
         if (numberOfGuesses === -1) {
-            alert("You lose! Refresh the browser to play again.");
+            alert("You lose!");
+            gameStart();
         }
 
         if (currentWord == matchedLetters.join('')) {
             alert("You win! Congratulations!");
             console.log(currentWord.split(""))
-            document.location.reload()
+            // document.location.reload()
+            wins++;
+            document.getElementById("wins").innerHTML = wins
+            gameStart();
         }
 
 
